@@ -5,12 +5,13 @@ namespace TombolaGame_Project {
         private static void Main(string[] args) {
             var board = new Billboard(6);
             // List<Card> cards = new List<Card>(6);
-
-
+            //
+            //
             // for (int i = 0; i < 6; i++) {
             //     cards.Add(new Card());
             // }
-
+            //
+            Console.WriteLine("ciao");
             // for (int i = 0; i < 90; i++) {
             //     int extractedNum = board.Extract();
             //     Console.WriteLine(extractedNum);
