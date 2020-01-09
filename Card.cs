@@ -6,13 +6,13 @@ namespace TombolaGame_Project {
             card; //numeri della scheda: true se il numero è ancora libero, false se è stato estratto e quindi occupato
 
         private ushort
-            score; //numeri estratti appartenenti alla scheda, se arriva a 2: ambo  3:terna  4:quaterna 5: cinquina  15:tombola
+            _score; //numeri estratti appartenenti alla scheda, se arriva a 2: ambo  3:terna  4:quaterna 5: cinquina  15:tombola
 
 
         //inizializza lo score a 0 e la lista con i numeri casuali generati
         public Card(List<int> cardNums) {
             card = new Dictionary<int, bool>(15);
-            score = 0;
+            _score = 0;
             for (var i = 0; i < 15; i++) card.Add(cardNums[i], true);
         }
 
@@ -20,14 +20,14 @@ namespace TombolaGame_Project {
         public bool NumberExtracted(int num) {
             if (!card.ContainsKey(num)) return false;
             card[num] = false;
-            score++;
-            return score == 3 || score == 4 || score == 5 || score == 15;
+            _score++;
+            return _score == 3 || _score == 4 || _score == 5 || _score == 15;
         }
 
         //controlla il risultato conseguito e restituisce niente se non si ha raggionto nessun
         //obbiettivo o il nome della vincita se si ha raggiunto un obbiettivo
         public string CheckResult() {
-            return score switch {
+            return _score switch {
                 2 => "Ambo",
                 3 => "Terna",
                 4 => "Quaterna",
