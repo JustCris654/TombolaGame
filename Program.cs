@@ -3,8 +3,7 @@
 namespace TombolaGame_Project {
     internal class Program {
         private static void Main(string[] args) {
-            Billboard board;
-
+            
             Console.WriteLine("                                                        " +
                               "\n       _____ _____ _____ _____ _____ __    _____    _ " +
                               "\n      |_   _|     |     | __  |     |  |  |  _  |  | |_ _ _ " +
@@ -17,8 +16,9 @@ namespace TombolaGame_Project {
                               "\n      |   --|  _| |_ -|  _| | .'|   |  |__   |  _| .'| . | |   |" +
                               "\n      |_____|_| |_|___|_| |_|__,|_|_|  |_____|___|__,|  _|_|_|_|" +
                               "\n                                                     |_| \n  ");
+            
             Console.WriteLine("Numero cartelle minimo: 1\nNumero cartelle massimo: 6");
-            board = new Billboard(GetCardNum("Inserisci numero cartelle: "));
+            var board = new Billboard(GetCardNum("Inserisci numero cartelle: "));
 
 
             // for (int i = 0; i < 90; i++) {
