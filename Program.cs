@@ -20,33 +20,6 @@ namespace TombolaGame_Project {
             Console.WriteLine("Numero cartelle minimo: 1\nNumero cartelle massimo: 6");
             var board = new Billboard(GetCardNum("Inserisci numero cartelle: "));
             Console.WriteLine("La cartella numero " +  StartGame(board)+" ha vinto!!!");
-            
-            // for (int i = 0; i < 90; i++) {
-            //     int extractedNum = board.Extract();
-            //     Console.WriteLine(extractedNum);
-            //     for (int j = 0; j < 6; j++) {
-            //         if (cards[j].NumberExtracted(extractedNum)) {
-            //             string result = cards[j].CheckResult();
-            //             Console.WriteLine("  -La cartella numero: "+j+" ha fatto: "+result);
-            //             if (string.Compare(result, "Tombola") == 0) {
-            //                 i = 90;
-            //                 j = 6;
-            //             }
-            //         }
-            //     }
-            // }
-
-
-            // int extractedNum;
-            // for (int i = 0; i < 90; i++) {
-            //     extractedNum = board.Extract();
-            //     if (extractedNum == -1) continue;         /*se il valore è -1 quindi tutti i numeri sono stati estratti
-            //                                                 salto al prossimo ciclo*/
-            //                        
-            //         
-            //
-            // }
-
 
             Console.ReadKey();
         }
