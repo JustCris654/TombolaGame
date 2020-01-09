@@ -19,7 +19,6 @@ namespace TombolaGame_Project {
             
             Console.WriteLine("Numero cartelle minimo: 1\nNumero cartelle massimo: 6");
             var board = new Billboard(GetCardNum("Inserisci numero cartelle: "));
-            Console.WriteLine("CIAO GAYS");
 
             // for (int i = 0; i < 90; i++) {
             //     int extractedNum = board.Extract();
