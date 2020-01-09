@@ -3,15 +3,24 @@
 namespace TombolaGame_Project {
     internal class Program {
         private static void Main(string[] args) {
-            var board = new Billboard(6);
-            // List<Card> cards = new List<Card>(6);
-            //
-            //
-            // for (int i = 0; i < 6; i++) {
-            //     cards.Add(new Card());
-            // }
-            //
-            Console.WriteLine("ciao");
+            Billboard board;
+
+            Console.WriteLine("                                                        " +
+                              "\n       _____ _____ _____ _____ _____ __    _____    _ " +
+                              "\n      |_   _|     |     | __  |     |  |  |  _  |  | |_ _ _ " +
+                              "\n        | | |  |  | | | | __ -|  |  |  |__|     |  | . | | |" +
+                              "\n        |_| |_____|_|_|_|_____|_____|_____|__|__|  |___|_  |" +
+                              "\n                                                       |___|" +
+                              "\n " +
+                              "\n       _____     _     _   _            _____             _ " +
+                              "\n      |     |___|_|___| |_|_|___ ___   |   __|___ ___ ___|_|___ " +
+                              "\n      |   --|  _| |_ -|  _| | .'|   |  |__   |  _| .'| . | |   |" +
+                              "\n      |_____|_| |_|___|_| |_|__,|_|_|  |_____|___|__,|  _|_|_|_|" +
+                              "\n                                                     |_| \n  ");
+            Console.WriteLine("Numero cartelle minimo: 1\nNumero cartelle massimo: 6");
+            board = new Billboard(GetCardNum("Inserisci numero cartelle: "));
+
+
             // for (int i = 0; i < 90; i++) {
             //     int extractedNum = board.Extract();
             //     Console.WriteLine(extractedNum);
@@ -27,7 +36,40 @@ namespace TombolaGame_Project {
             //     }
             // }
 
+
+            // int extractedNum;
+            // for (int i = 0; i < 90; i++) {
+            //     extractedNum = board.Extract();
+            //     if (extractedNum == -1) continue;         /*se il valore è -1 quindi tutti i numeri sono stati estratti
+            //                                                 salto al prossimo ciclo*/
+            //                        
+            //         
+            //
+            // }
+
+
             Console.ReadKey();
+        }
+
+
+        private static int StartGame(Billboard billboard) {
+            for (int i = 0; i < billboard.cardNum; i++) {
+                if (billboard.Extract()==-1) continue;            //è una situazione impossibile ma la controllo per completezza
+                
+            }
+
+            return 0;
+        }
+        
+        
+        private static int GetCardNum(string text) {
+            while (true) {
+                Console.Write(text);
+                int num = Int32.Parse(Console.ReadLine());
+                if (num > 0 && num <= 6) {
+                    return num;
+                }
+            }
         }
     }
 }

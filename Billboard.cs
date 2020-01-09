@@ -4,51 +4,59 @@ using System.Linq;
 
 namespace TombolaGame_Project {
     public class Billboard {
-        private readonly Dictionary<int, bool> billboard;
+        private readonly Dictionary<int, bool> _billboard;
 
-        private readonly List<Card> cards; /*fai una lista con le cartelle
+        private readonly List<Card> _cards; /*fai una lista con le cartelle
                                                 genera casualmente i numeri per le singole cartelle
                                                 facendo attenzione che non si ripetano poi gestisci 
                                                 le cartelle dalla classe Billboard dato che nella 
                                                 tombola senza il tabellone non possono esistere 
                                                 le cartelle*/
 
-        private readonly List<int> extractedNums;
-        private readonly Random rnd;
 
+        public int cardNum = -1;
+
+        private readonly List<int> _extractedNums;
+        private readonly Random _rnd;
+        
+        
+        
         public Billboard(int numCards) {
-            rnd = new Random();
-            extractedNums = new List<int>(90);
+            cardNum = numCards;
+            _rnd = new Random();
+            _extractedNums = new List<int>(90);
 
-            billboard = new Dictionary<int, bool>(90);
-            for (var i = 1; i <= 90; i++) billboard.Add(i, true);
+            _billboard = new Dictionary<int, bool>(90);
+            for (var i = 1; i <= 90; i++) _billboard.Add(i, true);
 
-            cards = new List<Card>(numCards);
+            _cards = new List<Card>(numCards);
             var cardNums = new List<int>(15);
 
             for (var i = 0; i < numCards; i++) {
-                for (var j = 0; j < 15; j++) cardNums.Add(GenerateNumber());
+                for (var j = 0; j < 15; j++) cardNums.Add(GenerateNumber());     //genero i numeri che poi andranno ad 
+                                                                                 //essere inseriti nella cartella
+                _cards.Add(new Card(cardNums));                                  //creo la cartella inserendoci i numeri
+                cardNums.Clear();                                                //svuoto la lista con i numeri 
+            }    
 
-                cards.Add(new Card(cardNums));
-            }
-
-            extractedNums.Clear();
+            _extractedNums.Clear();
         }
+
+       
 
 
         public List<int> GetExtractedNums() {
-            return extractedNums;
+            return _extractedNums;
         }
 
         //genera numero casuali non ripetuti.
         //Si appoggia ad una lista che poi verrà utilizzata quindi questo metodo non puo essere usato se non nel costruttore
         private int GenerateNumber() {
             while (true) {
-                var num = rnd.Next(1, 91);
-                if (!extractedNums.Contains(num)) {
-                    extractedNums.Add(num);
-                    return num;
-                }
+                var num = _rnd.Next(1, 91);
+                if (_extractedNums.Contains(num)) continue;
+                _extractedNums.Add(num);
+                return num;
             }
         }
 
@@ -57,22 +65,22 @@ namespace TombolaGame_Project {
         public int Extract() {
             if (IsCompleted()) return -1;
             while (true) {
-                var extractedNum = rnd.Next(1, 91);
-                if (!billboard[extractedNum]) continue;
-                billboard[extractedNum] = false;
-                extractedNums.Add(extractedNum);
+                var extractedNum = _rnd.Next(1, 91);
+                if (!_billboard[extractedNum]) continue;
+                _billboard[extractedNum] = false;
+                _extractedNums.Add(extractedNum);
                 return extractedNum;
             }
         }
 
         //Restituisce true se tutti i numeri sono estratti e false in caso contrario
         public bool IsCompleted() {
-            return billboard.All(x => x.Value != true);
+            return _billboard.All(x => x.Value != true);
         }
 
         //Stampa tutte le estrazioni fin'ora effettuate
         public void PrintExtractions() {
-            foreach (var k in billboard.Where(k => !k.Value)) Console.Write(k.Key + " - ");
+            foreach (var k in _billboard.Where(k => !k.Value)) Console.Write(k.Key + " - ");
         }
 
         //Crea una stringa con i numeri del tabellone estratti o degli asterischi per i numero non estratti
@@ -82,7 +90,7 @@ namespace TombolaGame_Project {
 
             for (var i = 0; i < 9; i++) {
                 for (var j = 1; j <= 10; j++)
-                    if (!billboard[i * 10 + j]) {
+                    if (!_billboard[i * 10 + j]) {
                         if (i * 10 + j < 10) billBoardToPrint += '0';
                         billBoardToPrint += $"{i * 10 + j} - ";
                     }
