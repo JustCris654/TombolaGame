@@ -39,7 +39,8 @@ namespace TombolaGame_Project {
 
 
         public string CardResult(Card card, int num) {
-            return card.CheckResult(num);
+            if (card.NumberExtracted(num)) return card.CheckResult();
+            return "";
         }
 
         public List<int> GetExtractedNums() {

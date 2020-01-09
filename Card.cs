@@ -17,18 +17,16 @@ namespace TombolaGame_Project {
         }
 
         //controlla se un numero estratto appartriene alla cartella e in caso aumenta lo score e setta a false il numero
-        public void NumberExtracted(int num) {
-            if (card.ContainsKey(num)) {
-                card[num] = false;
-                _score++;
-            }
-
+        public bool NumberExtracted(int num) {
+            if (!card.ContainsKey(num)) return false;
+            card[num] = false;
+            _score++;
+            return _score == 2 || _score == 3 || _score == 4 || _score == 5 || _score == 15;
         }
 
         //controlla il risultato conseguito e restituisce niente se non si ha raggionto nessun
         //obbiettivo o il nome della vincita se si ha raggiunto un obbiettivo
-        public string CheckResult(int num) {
-            NumberExtracted(num);
+        public string CheckResult() {
             return _score switch {
                 2 => "Ambo",
                 3 => "Terna",
