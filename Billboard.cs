@@ -6,13 +6,8 @@ namespace TombolaGame_Project {
     public class Billboard {
         private readonly Dictionary<int, bool> _billboard;
 
-        private readonly List<Card> _cards; /*fai una lista con le cartelle
-                                                genera casualmente i numeri per le singole cartelle
-                                                facendo attenzione che non si ripetano poi gestisci 
-                                                le cartelle dalla classe Billboard dato che nella 
-                                                tombola senza il tabellone non possono esistere 
-                                                le cartelle*/
 
+        public List<Card> Cards { get; }
 
         public int cardNum = -1;
 
@@ -29,21 +24,24 @@ namespace TombolaGame_Project {
             _billboard = new Dictionary<int, bool>(90);
             for (var i = 1; i <= 90; i++) _billboard.Add(i, true);
 
-            _cards = new List<Card>(numCards);
+            Cards = new List<Card>(numCards);
             var cardNums = new List<int>(15);
 
             for (var i = 0; i < numCards; i++) {
                 for (var j = 0; j < 15; j++) cardNums.Add(GenerateNumber());     //genero i numeri che poi andranno ad 
                                                                                  //essere inseriti nella cartella
-                _cards.Add(new Card(cardNums));                                  //creo la cartella inserendoci i numeri
+                Cards.Add(new Card(cardNums));                                  //creo la cartella inserendoci i numeri
                 cardNums.Clear();                                                //svuoto la lista con i numeri 
             }    
 
             _extractedNums.Clear();
         }
 
-       
 
+        public string CardResult(Card card, int num) {
+            if (card.NumberExtracted(num)) return card.CheckResult();
+            return "";
+        }
 
         public List<int> GetExtractedNums() {
             return _extractedNums;

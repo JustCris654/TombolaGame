@@ -21,7 +21,7 @@ namespace TombolaGame_Project {
             if (!card.ContainsKey(num)) return false;
             card[num] = false;
             _score++;
-            return _score == 3 || _score == 4 || _score == 5 || _score == 15;
+            return _score == 2 || _score == 3 || _score == 4 || _score == 5 || _score == 15;
         }
 
         //controlla il risultato conseguito e restituisce niente se non si ha raggionto nessun

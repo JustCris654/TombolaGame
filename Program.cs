@@ -19,44 +19,30 @@ namespace TombolaGame_Project {
             
             Console.WriteLine("Numero cartelle minimo: 1\nNumero cartelle massimo: 6");
             var board = new Billboard(GetCardNum("Inserisci numero cartelle: "));
-
-
-            // for (int i = 0; i < 90; i++) {
-            //     int extractedNum = board.Extract();
-            //     Console.WriteLine(extractedNum);
-            //     for (int j = 0; j < 6; j++) {
-            //         if (cards[j].NumberExtracted(extractedNum)) {
-            //             string result = cards[j].CheckResult();
-            //             Console.WriteLine("  -La cartella numero: "+j+" ha fatto: "+result);
-            //             if (string.Compare(result, "Tombola") == 0) {
-            //                 i = 90;
-            //                 j = 6;
-            //             }
-            //         }
-            //     }
-            // }
-
-
-            // int extractedNum;
-            // for (int i = 0; i < 90; i++) {
-            //     extractedNum = board.Extract();
-            //     if (extractedNum == -1) continue;         /*se il valore è -1 quindi tutti i numeri sono stati estratti
-            //                                                 salto al prossimo ciclo*/
-            //                        
-            //         
-            //
-            // }
-
+            Console.WriteLine("La cartella numero " +  StartGame(board)+" ha vinto!!!");
+            Console.WriteLine(board.ToString());
 
             Console.ReadKey();
         }
 
 
         private static int StartGame(Billboard billboard) {
-            for (int i = 0; i < billboard.cardNum; i++) {
-                if (billboard.Extract()==-1) continue;            //è una situazione impossibile ma la controllo per completezza
+            for (int i = 0; i < 90 || billboard.IsCompleted(); i++) {
+
+                int numExtracted = billboard.Extract();
+                if(numExtracted==-1) continue;
                 
+                for (int j = 0; j < billboard.cardNum; j++) {
+                    string result = billboard.CardResult(billboard.Cards[j], numExtracted);
+                    if (result != "") {
+                        Console.WriteLine("La scheda numero "+(j+1)+" ha fatto: "+ result);
+                        Console.WriteLine(billboard.ToString());
+                        Console.WriteLine("\n\n"+billboard.GetExtractedNums().Count+"\n");
+                        if (result == "Tombola") return j+1;
+                    }
+                }
             }
+            
 
             return 0;
         }
@@ -65,7 +51,13 @@ namespace TombolaGame_Project {
         private static int GetCardNum(string text) {
             while (true) {
                 Console.Write(text);
-                int num = Int32.Parse(Console.ReadLine());
+                int num = -1;
+                try {
+                    num = Int32.Parse(Console.ReadLine());
+                }
+                catch{
+                    continue;
+                }
                 if (num > 0 && num <= 6) {
                     return num;
                 }
